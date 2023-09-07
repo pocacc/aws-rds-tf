@@ -12,10 +12,3 @@ module "aws_rds" {
   port                   = var.port
   skip_final_snapshot    = var.skip_final_snapshot
  
-  tags = {
-      Name        = var.name
-      Environment = var.environment
-      Provisioner = "Terraform"
-     
-    }
-}
