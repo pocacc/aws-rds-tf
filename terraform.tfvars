@@ -1,5 +1,4 @@
   identifier             = "poc-idp-rds"
-  name                   =  "create-rds"
   allocated_storage      = 20
   storage_type           = "gp3"
   engine                 = "mysql"
@@ -9,4 +8,9 @@
   password               = "jq%wdS5C!AB4" 
   port                   = 3306"
   skip_final_snapshot    = true
-  environment            = "test"
+ 
+
+tags = {
+ environment            = "test"
+ name                   =  "create-rds"
+}
