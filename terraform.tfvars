@@ -10,9 +10,3 @@
   skip_final_snapshot    = true
  
 
-tags = {
-      Name        = "create-rds"
-      Environment = "test"
-      Provisioner = "Terraform"
-     
-    }
