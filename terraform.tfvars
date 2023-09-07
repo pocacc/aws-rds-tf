@@ -11,6 +11,8 @@
  
 
 tags = {
- Environment            = "test"
- Name                   =  "create-rds"
-}
+      Name        = "create-rds"
+      Environment = "test"
+      Provisioner = "Terraform"
+     
+    }
