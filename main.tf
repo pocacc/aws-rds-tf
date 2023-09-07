@@ -9,5 +9,5 @@ module "aws_rds" {
   username             = var.username
   password             = var.password 
   parameter_group_name = var.parameter_group_name
-  skip_final_snapshot  = false
+  skip_final_snapshot  = var.skip_final_snapshot
 }
