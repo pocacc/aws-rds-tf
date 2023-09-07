@@ -11,4 +11,5 @@ module "aws_rds" {
   password               = var.password
   port                   = var.port
   skip_final_snapshot    = var.skip_final_snapshot
- 
+
+}
