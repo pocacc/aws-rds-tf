@@ -7,4 +7,4 @@
   username             = "foo"
   password             = "foobarbaz"
   parameter_group_name = "default.mysql5.7"
-  skip_final_snapshot  = false
+  skip_final_snapshot  = true
