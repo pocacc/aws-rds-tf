@@ -11,6 +11,6 @@
  
 
 tags = {
- environment            = "test"
- name                   =  "create-rds"
+ Environment            = "test"
+ Name                   =  "create-rds"
 }
