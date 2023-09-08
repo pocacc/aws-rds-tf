@@ -5,7 +5,7 @@ metadata:
   name: criar-rds
   title: Criação de banco de dados Amazon RDS
   description: >
-    Oferta de criação de banco de dados Amazon RDS com automação no AWX.
+    O Amazon Relational Database Service, ou Amazon RDS é um serviço de banco de dados relacional distribuído da Amazon Web Services. É um serviço da web executado "na nuvem" projetado para simplificar a configuração, operação e escalonamento de um banco de dados relacional para uso em aplicativos.
 spec:
   owner: Group:default/yoyo
   type: resource
@@ -93,6 +93,7 @@ spec:
     - title: Defina as configurações do ambiente
       properties:
         banco:
+        identifier:
           title: nome do banco
           type: string
           description: insira o nome do banco de dados
@@ -102,11 +103,11 @@ spec:
           type: number
           description: insira o tamanho do volume de seu armazenamento (10 ... 20 ... 30)
           ui:autofocus: true
-        volume_type:
+        storage_type:
           title: Tipo de volume
           type: string
           description: Tipo de disco a ser utilizado
-          default: gp2
+          default: gp3
           enum:
             - gp2
             - gp3
@@ -126,7 +127,7 @@ spec:
         engine:
           title: Defina a engine do banco de dados
           type: string
-          description: Informa qual a engine que será utilizado para RDS
+          description: Informe qual a engine que será utilizado para RDS
           default: mysql
           enum:
             - aurora
@@ -160,6 +161,35 @@ spec:
             - "docdb"
             - "neptune"
             - "timestream"
+        engine_version:
+          title: Defina a versão da engine do banco de dados
+          type: string
+          description: Informe qual a engine que será utilizado para RDS
+          default: 5.7
+          enum:
+            - 5.7
+            - 8.0.34
+            - 8.0.33
+            - 8.0.32
+            - 8.0.31
+            - 8.0.30
+            - 8.0.28
+            - 5.7.43
+            - 5.7.42
+            - 5.7.41
+            - 5.7.40
+          enumNames:
+            - "5.7"
+            - "8.0.34"
+            - "8.0.33"
+            - "8.0.32"
+            - "8.0.31"
+            - "8.0.30"
+            - "8.0.28"
+            - "5.7.43"
+            - "5.7.42"
+            - "5.7.41"
+            - "5.7.40"    
         instance_class:
           title: Defina o tipo de instância
           type: string
