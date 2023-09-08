@@ -94,7 +94,7 @@ spec:
       properties:
         banco:
         identifier:
-          title: nome do banco
+          title: Nome do banco dados RDS
           type: string
           description: insira o nome do banco de dados
           ui:autofocus: true
@@ -293,6 +293,34 @@ spec:
             - "db.t2.small"
             - "db.t2.medium"
             - "db.t2.large"
+        username:
+           title: username
+           type: string
+           description: insira o nome do user ADM do banco de Dados.
+           ui:autofocus: true
+        password:
+           title: password
+           type: string
+           description: insira a senha do user ADM do banco de Dados.
+           ui:autofocus: true
+        port:
+           title: porta de conexão com o RDS
+           type: number
+           description: insira a senha do user ADM do banco de Dados.
+           default: 3306
+           ui:autofocus: true
+        skip_final_snapshot:
+           title: Criação de um snapshot em caso de deleção do RDS
+           type: bool
+           description: Determina se um snapshot de banco de dados final será criado antes da instância de banco de dados ser excluída.
+           default: true
+           ui:autofocus: true
+           enum:
+              - false
+              - true
+           enumNames:
+              - "false"
+              - "true"           
     - title: Pré-requisitos
       required:
         - prereq
