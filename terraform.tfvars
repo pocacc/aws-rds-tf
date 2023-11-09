@@ -1,4 +1,4 @@
-  identifier             = "poc-idp-rds"
+  identifier             = "ic-rds-test-deploy"
   allocated_storage      =  20
   storage_type           = "gp3"
   engine                 = "mysql"
