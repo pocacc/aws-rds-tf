@@ -1,0 +1,356 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  namespace: default
+  name: criar-rds
+  title: Criação de banco de dados Amazon RDS
+  description: >
+    O Amazon Relational Database Service, ou Amazon RDS é um serviço de banco de dados relacional distribuído da Amazon Web Services. É um serviço da web executado "na nuvem" projetado para simplificar a configuração, operação e escalonamento de um banco de dados relacional para uso em aplicativos.
+  labels:
+    example.com/custom: custom_label_value
+  annotations:
+    example.com/service-discovery: teste
+    circleci.com/project-slug: github.com/pocacc/aws-rds-tf
+  tags:
+    - database
+    - db
+    - resource
+    - dataops
+  links:
+    - url: https://backstage.iccloudstudio.com/
+      title: Accenture
+      icon: dashboard
+      type: admin-dashboard
+spec:
+  owner: group:infrastructure
+  type: resource
+  system: examples
+  parameters:
+    - title: Informe a squad
+      properties:
+       
+    - title: Informacões sobre o solicitante
+      required:
+        - nome
+        - email
+      properties:
+        nome:
+          title: Nome do líder técnico da área*
+          type: string
+          description: Insira o nome do líder técnico.
+          ui:autofocus: true
+        email:
+          title: E-mail do líder técnico*
+          type: string
+          description: Insira o nome do líder técnico.
+          ui:autofocus: true
+    - title: Selecione o ambiente AWS
+      properties:
+        name:
+          title: Selecione o ambiente
+          type: array
+          items:
+            type: string
+            enum:
+              - production
+              - staging
+              - development
+          uniqueItems: true
+          ui:widget: checkboxes
+        region:
+          title: Escolha a região
+          type: string
+          description: Região na AWS a qual o ambiente será configurado
+          default: us-east-1
+          enum:
+            - af-south-1
+            - ap-east-1
+            - ap-south-1
+            - ap-northeast-3
+            - ap-northeast-2
+            - ap-southeast-1
+            - ap-southeast-2
+            - ap-northeast-1
+            - ca-central-1
+            - eu-central-1
+            - eu-west-1
+            - eu-west-2
+            - eu-south-1
+            - eu-west-3
+            - eu-north-1
+            - sa-east-1
+            - us-gov-west-1
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+          enumNames:
+            - "África (Cidade do Cabo) - af-south-1"
+            - "Ásia-Pacífico (Hong Kong) - ap-east-1"
+            - "Ásia-Pacífico (Mumbai) - ap-south-1"
+            - "Ásia-Pacífico (Osaka-Local) - ap-northeast-3"
+            - "Ásia-Pacífico (Seoul) - ap-northeast-2"
+            - "Ásia-Pacífico (Cingapura) - ap-southeast-1"
+            - "Ásia-Pacífico (Sydney) - ap-southeast-2"
+            - "Ásia-Pacífico (Tóquio) - ap-northeast-1"
+            - "Canadá (Central) - ca-central-1"
+            - "Europa (Frankfurt) - eu-central-1"
+            - "Europa (Irlanda) - eu-west-1"
+            - "Europa (Londres) - eu-west-2"
+            - "Europa (Milão) - eu-south-1"
+            - "Europa (Paris) - eu-west-3"
+            - "Europa (Estocolmo) - eu-north-1"
+            - "América do Sul (São Paulo) - sa-east-1"
+            - "AWS GovCloud (EUA) - us-gov-west-1"
+            - "Leste dos EUA (Norte da Virgínia) - us-east-1"
+            - "Leste dos EUA (Ohio) - us-east-2"
+            - "Oeste dos EUA (Norte da Califórnia) - us-west-1"
+            - "Oeste dos EUA (Oregon) - us-west-2"
+    - title: Defina as configurações do ambiente
+      properties:
+        banco:
+        identifier:
+          title: Nome do banco dados RDS
+          type: string
+          description: insira o nome do banco de dados
+          ui:autofocus: true
+        allocated_storage:
+          title: 20GB
+          type: number
+          description: insira o tamanho do volume de seu armazenamento (10 ... 20 ... 30)
+          ui:autofocus: true
+        storage_type:
+          title: Tipo de volume
+          type: string
+          description: Tipo de disco a ser utilizado
+          default: gp3
+          enum:
+            - gp2
+            - gp3
+            - io1
+            - io2
+            - sc1
+            - st1
+            - standard
+          enumNames:
+            - "General Purpose SSD (gp2)"
+            - "General Purpose SSD (gp3)"
+            - "Provisioned IOPS (io1)"
+            - "Provisioned IOPS (io2)"
+            - "Cold HDD (sc1)"
+            - "Throughput Optimized HDD (st1)"
+            - "Magnetic (standard)"
+        engine:
+          title: Defina a engine do banco de dados
+          type: string
+          description: Informe qual a engine que será utilizado para RDS
+          default: mysql
+          enum:
+            - aurora
+            - aurora-mysql
+            - aurora-postgresql
+            - mysql
+            - oracle-ee
+            - oracle-se2
+            - oracle-se1
+            - oracle-se
+            - postgres
+            - sqlserver-ee
+            - sqlserver-se
+            - sqlserver-ex
+            - sqlserver-web
+          enumNames:
+            - "aurora"
+            - "aurora-mysql"
+            - "aurora-postgresql"
+            - "mysql"
+            - "mariadb"
+            - "oracle-ee"
+            - "oracle-se2"
+            - "oracle-se1"
+            - "oracle-se"
+            - "postgres"
+            - "sqlserver-ee"
+            - "sqlserver-se"
+            - "sqlserver-ex"
+            - "sqlserver-web"
+            - "docdb"
+            - "neptune"
+            - "timestream"
+        engine_version:
+          title: Defina a versão da engine do banco de dados
+          type: string
+          description: Informe qual a engine que será utilizado para RDS
+          default: 5.7
+          enum:
+            - 5.7
+            - 8.0.34
+            - 8.0.33
+            - 8.0.32
+            - 8.0.31
+            - 8.0.30
+            - 8.0.28
+            - 5.7.43
+            - 5.7.42
+            - 5.7.41
+            - 5.7.40
+          enumNames:
+            - "5.7"
+            - "8.0.34"
+            - "8.0.33"
+            - "8.0.32"
+            - "8.0.31"
+            - "8.0.30"
+            - "8.0.28"
+            - "5.7.43"
+            - "5.7.42"
+            - "5.7.41"
+            - "5.7.40"    
+        instance_class:
+          title: Defina o tipo de instância
+          type: string
+          description: Defina o tipo da instância
+          default: db.t3.micro
+          enum:
+            - db.t3.micro
+            - db.t3.small
+            - db.t3.medium
+            - db.t3.large
+            - db.t3.xlarge
+            - db.t3.2xlarge
+            - db.m5.large
+            - db.m5.xlarge
+            - db.m5.2xlarge
+            - db.m5.4xlarge
+            - db.m5.12xlarge
+            - db.m5.24xlarge
+            - db.m4.large
+            - db.m4.xlarge
+            - db.m4.2xlarge
+            - db.m4.4xlarge
+            - db.m4.10xlarge
+            - db.m4.16xlarge
+            - db.r5.large
+            - db.r5.xlarge
+            - db.r5.2xlarge
+            - db.r5.4xlarge
+            - db.r5.12xlarge
+            - db.r5.24xlarge
+            - db.r4.large
+            - db.r4.xlarge
+            - db.r4.2xlarge
+            - db.r4.4xlarge
+            - db.r4.8xlarge
+            - db.r4.16xlarge
+            - db.x1e.xlarge
+            - db.x1e.2xlarge
+            - db.x1e.4xlarge
+            - db.x1e.8xlarge
+            - db.x1e.16xlarge
+            - db.x1e.32xlarge
+            - db.m3.medium
+            - db.m3.large
+            - db.m3.xlarge
+            - db.m3.2xlarge
+            - db.m1.small
+            - db.m1.medium
+            - db.m1.large
+            - db.m1.xlarge
+            - db.t2.micro
+            - db.t2.small
+            - db.t2.medium
+            - db.t2.large
+          enumNames:
+            - "db.t3.micro"
+            - "db.t3.small"
+            - "db.t3.medium"
+            - "db.t3.large"
+            - "db.t3.xlarge"
+            - "db.t3.2xlarge"
+            - "db.m5.large"
+            - "db.m5.xlarge"
+            - "db.m5.2xlarge"
+            - "db.m5.4xlarge"
+            - "db.m5.12xlarge"
+            - "db.m5.24xlarge"
+            - "db.m4.large"
+            - "db.m4.xlarge"
+            - "db.m4.2xlarge"
+            - "db.m4.4xlarge"
+            - "db.m4.10xlarge"
+            - "db.m4.16xlarge"
+            - "db.r5.large"
+            - "db.r5.xlarge"
+            - "db.r5.2xlarge"
+            - "db.r5.4xlarge"
+            - "db.r5.12xlarge"
+            - "db.r5.24xlarge"
+            - "db.r4.large"
+            - "db.r4.xlarge"
+            - "db.r4.2xlarge"
+            - "db.r4.4xlarge"
+            - "db.r4.8xlarge"
+            - "db.r4.16xlarge"
+            - "db.x1e.xlarge"
+            - "db.x1e.2xlarge"
+            - "db.x1e.4xlarge"
+            - "db.x1e.8xlarge"
+            - "db.x1e.16xlarge"
+            - "db.x1e.32xlarge"
+            - "db.m3.medium"
+            - "db.m3.large"
+            - "db.m3.xlarge"
+            - "db.m3.2xlarge"
+            - "db.m1.small"
+            - "db.m1.medium"
+            - "db.m1.large"
+            - "db.m1.xlarge"
+            - "db.t2.micro"
+            - "db.t2.small"
+            - "db.t2.medium"
+            - "db.t2.large"
+        username:
+           title: username
+           type: string
+           description: insira o nome do user ADM do banco de Dados.
+           ui:autofocus: true
+        password:
+           title: password
+           type: string
+           description: insira a senha do user ADM do banco de Dados.
+           ui:autofocus: true
+        port:
+           title: porta de conexão com o RDS
+           type: number
+           description: insira a senha do user ADM do banco de Dados.
+           default: 3306
+           ui:autofocus: true
+        skip_final_snapshot:
+           title: Criação de um snapshot em caso de deleção do RDS
+           type: bool
+           description: Determina se um snapshot de banco de dados final será criado antes da instância de banco de dados ser excluída.
+           default: true
+           ui:autofocus: true
+           enum:
+              - false
+              - true
+           enumNames:
+              - "false"
+              - "true"           
+    - title: Pré-requisitos
+      required:
+        - prereq
+      properties:
+        prereq:
+          title: Preencha as dependências internas*
+          type: string
+          description: Insira as dependências necessárias para a aplicação funcionar.
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+  steps:
+  - id: hello
+    name: Hello
+    action: debug:log
+    input:
+      message: Seu host virtual ${{ parameters.hostname }}
